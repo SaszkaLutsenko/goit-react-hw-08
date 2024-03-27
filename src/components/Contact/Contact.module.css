@@ -1,0 +1,47 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  
+    width: 200px;
+    padding: 16px;
+    border: 1px solid grey;
+    border-radius: 8px;
+    background-color: lightgray;
+  }
+  
+  .icon {
+    margin-right: 8px;
+  }
+  
+  .name {
+    font-style: italic;
+    font-weight: 600;
+  }
+  
+  .button {
+    display: block;
+    width: 45px;
+    padding: 6px 4px;
+    border: 1px solid darkgrey;
+    border-radius: 15px;
+    background-color: grey;
+    transform: translate(278%);
+    transition: background-color 250ms grey;
+  }
+  
+  .button:hover,
+  .button:focus {
+    background-color: darkgrey;
+  }
+
+  .info {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+  }
+  
+  .delete {
+    border-radius: 10px;
+    border: 1px solid darkgrey;
+  }
