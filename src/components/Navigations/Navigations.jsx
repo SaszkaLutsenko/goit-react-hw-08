@@ -1,6 +1,6 @@
 import style from './Navigations.module.css';
 
-export default function Navigations() {
+const Navigations = () => {
   return (
     <div>
       <a className={style.link}>Register</a>
@@ -8,3 +8,5 @@ export default function Navigations() {
     </div>
   );
 }
+
+export default Navigations;

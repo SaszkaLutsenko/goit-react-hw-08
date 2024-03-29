@@ -4,7 +4,7 @@ import style from './UserMenu.module.css';
 import { logOut } from '../../redux/operations';
 
 
-export default function UserMenu() {
+const UserMenu = () => {
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
 
@@ -22,3 +22,5 @@ export default function UserMenu() {
     </div>
   );
 }
+
+export default UserMenu;

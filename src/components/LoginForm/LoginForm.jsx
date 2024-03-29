@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { logIn } from '../../redux/auth/operations';
+import { logIn } from '../../redux/operations';
 import { useDispatch } from 'react-redux';
 import style from './LoginForm.module.css';
 
@@ -9,7 +9,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required("Required"),
 });
 
-export default function LoginForm() {
+const LoginForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
     dispatch(logIn(values));
@@ -45,3 +45,5 @@ export default function LoginForm() {
     </Formik>
   );
 }
+
+export default LoginForm;

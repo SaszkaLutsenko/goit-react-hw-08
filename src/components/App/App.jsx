@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectError, selectLoading} from '../../redux/contactsSlice';
 import Loader from '../Loader/Loader';
@@ -9,20 +9,25 @@ import style from './App.module.css';
 import { fetchContacts } from '../../redux/contactsOps';
 import { selectIsLoggedIn } from '../../redux/selector';
 
+const AppBar = lazy(() => import( '../AppBar/AppBar'));
+const LoginForm = lazy(() => import( '../LoginForm/LoginForm'));
+const RegistrationForm = lazy(() => import('../RegistrationForm/RegistrationForm'));
+ 
 const App = () => {
     const dispatch = useDispatch();
     const loading = useSelector(selectLoading);
     const error = useSelector(selectError);
-    const isLoggenIn = useSelector(selectIsLoggedIn);
+    // const isLoggedIn = useSelector(selectIsLoggedIn);
 
     useEffect(() => {
         dispatch(fetchContacts());
     }, [dispatch]);
+    const { isLoggedIn } = useAuth
 
     return (
         <div className={style.container}>
             <AppBar />
-            {isLoggenIn ? (
+            {isLoggedIn ? (
                 <>
                     <p>Please log in</p>
                     <LoginForm />

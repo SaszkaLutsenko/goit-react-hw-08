@@ -3,7 +3,7 @@ import style from './RegistrationForm.module.css';
 import { useDispatch } from 'react-redux';
 import { register } from '../../redux/operations'
 
-export default function RegistrationForm() {
+const RegistrationForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
     console.log(values);
@@ -37,3 +37,5 @@ export default function RegistrationForm() {
     </Formik>
   );
 }
+
+export default RegistrationForm;
