@@ -11,7 +11,9 @@ import { selectIsRefreshing } from '../../redux/selector';
 import { logOut, refreshUser } from '../../redux/operations';
 import Layout from '../Layout/Layout';
 import { Route, Routes } from 'react-router-dom';
+import PrivateRoute from '../PrivateRoute/PrivateRoute';
 
+const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
 const AppBar = lazy(() => import( '../AppBar/AppBar'));
 const LoginForm = lazy(() => import( '../LoginForm/LoginForm'));
 const RegistrationForm = lazy(() => import('../RegistrationForm/RegistrationForm'));
@@ -33,7 +35,9 @@ const App = () => {
         ) : (
             <Suspense fallback={<Loader />}>
                  <Routes>
-                    <Route path='/' element={}/>
+                    <Route path='/' element={HomePage} />
+                  <Route path='/contacts' 
+                  element={<PrivateRoute component={<}}  />  
             </Routes>
             </Suspense>
            
