@@ -1,3 +1,11 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -29,4 +37,15 @@ ul {
 
 button {
   cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  background: #c9d6ff;
+  background: -webkit-linear-gradient(to right, #e2e2e2, #c9d6ff);
+  background: linear-gradient(to right, #e2e2e2, #c9d6ff);
 }
