@@ -1,0 +1,6 @@
+.link {
+    transition: all background-color 250ms grey;
+  }
+  .isActive {
+    color: green;
+  }
