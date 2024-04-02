@@ -1,12 +1,16 @@
-import style from './Navigations.module.css';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../../redux/auth/selector';
+import CustomNavLink from '../CustomNavLink/CustomNavLink';
 
 const Navigations = () => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
-    <div>
-      <a className={style.link}>Register</a>
-      <a className={style.link}>Log In</a>
-    </div>
+    <>
+      <CustomNavLink key="home" to='/'>Home Page</CustomNavLink>
+      {isLoggedIn && <CustomNavLink key="contacts" to='/contacts'>Contact Page</CustomNavLink>}
+    </>
   );
-}
+};
 
 export default Navigations;
