@@ -1,4 +1,4 @@
-import style from './HomePage.module.css';
+import style from './Home.module.css';
 
 const HomePage = () => {
     return (

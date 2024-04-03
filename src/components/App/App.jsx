@@ -7,16 +7,18 @@ import Layout from '../Layout/Layout';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
-import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
+import { selectLoading } from '../../redux/auth/selector';
 
+const NotFoundPage = (() => import('../../pages/NotFoundPage/NotFoundPage'));
 const ContactPage = lazy(() => import('../../pages/ContactsPage/ContactsPage'));
-const HomePage = lazy(() => import('../../pages/HomePage/HomePage'));
+const Home = lazy(() => import('../../pages/Home/Home'));
 const LoginForm = lazy(() => import('../LoginForm/LoginForm'));
 const RegistrationForm = lazy(() => import('../RegistrationForm/RegistrationForm'));
 
 const App = () => {
     const dispatch = useDispatch();
     const isRefreshing = useSelector(selectIsRefreshing);
+    const loading = useSelector(selectLoading)
     
     useEffect(() => {
         dispatch(refreshUser());
@@ -29,18 +31,18 @@ const App = () => {
             ) : (
                 <Suspense fallback={<Loader />}>
                     <Routes>
-                        <Route path='/' element={<HomePage />} />
+                        <Route path='/' element={<Home />} />
                         <Route
                             path='/contacts'
-                            element={<PrivateRoute component={ContactPage} redirectTo='/login' />}
+                            element={<PrivateRoute component={<ContactPage />} redirectTo='/login' />}
                         />
                         <Route
                             path='/login'
-                            element={<RestrictedRoute component={LoginForm} redirectTo='/contacts' />}
+                            element={<RestrictedRoute component={<LoginForm />} redirectTo='/contacts' />}
                         />
                         <Route
                             path='/register'
-                            element={<RestrictedRoute component={RegistrationForm} redirectTo='/contacts' />}
+                            element={<RestrictedRoute component={<RegistrationForm />} redirectTo='/contacts' />}
                         />
                         <Route path='*' element={<NotFoundPage />} />
                     </Routes>
