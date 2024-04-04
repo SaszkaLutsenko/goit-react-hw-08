@@ -40,7 +40,7 @@ const LoginForm = () => {
           <Field type="password" name="password" placeholder="Enter your password" />
           <ErrorMessage name="password" component="div" className={style.error} />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Log In</button>
       </Form>
     </Formik>
   );

@@ -8,6 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
 import { selectLoading } from '../../redux/auth/selectors';
+import style from './App.module.css';
 
 const NotFoundPage = (() => import('../../pages/NotFoundPage/NotFoundPage'));
 const ContactPage = lazy(() => import('../../pages/ContactsPage/ContactsPage'));
@@ -25,38 +26,55 @@ const App = () => {
     }, [dispatch]);
 
     return (
-        <Suspense fallback={<Loader />}>
-            {loading ? (
-                <Loader />
-            ) : (
-                <>
-                    {isRefreshing ? (
-                        <b>...refreshing</b>
-                    ) : (
-                        <div>
-                            <Layout />
-                            <Routes>
-                                <Route path='/' element={<Home />} />
-                                <Route
-                                    path='/register'
-                                    element={<RestrictedRoute component={<Registration />} redirectTo='/contacts' />}
-                                />
-                                <Route
-                                    path='/login'
-                                    element={<RestrictedRoute component={<Login />} redirectTo='/contacts' />}
-                                />
-                                <Route
-                                    path='/contacts'
-                                    element={<PrivateRoute component={<ContactPage />} redirectTo='/login' />}
-                                />
-                                <Route path='*' element={<NotFoundPage />} />
-                            </Routes>
-                        </div>
-                    )}
-                </>
-            )}
-        </Suspense>
-    );
+        <>
+          {}
+          {loading ? (
+            <Loader />
+          ) : (
+            <>
+              {isRefreshing ? (
+                <b>...Refreshing</b>
+              ) : (
+                <div className={style.container}>
+                  <Routes>
+                    <Route path="/" element={<Layout />}>
+                      <Route index element={<Home />} />
+                      <Route
+                        path="/register"
+                        element={
+                          <RestrictedRoute
+                            redirectTo="/contacts"
+                            component={<Registration />}
+                          />
+                        }
+                      />
+                      <Route
+                        path="/login"
+                        element={
+                          <RestrictedRoute
+                            redirectTo="/contacts"
+                            component={<Login />}
+                          />
+                        }
+                      />
+                      <Route
+                        path="/contacts"
+                        element={
+                          <PrivateRoute
+                            redirectTo="/login"
+                            component={<ContactPage />}
+                          />
+                        }
+                      />
+                    </Route>
+                  </Routes>
+                </div>
+              )}
+            </>
+          )}{" "}
+          {}
+        </>
+      );
 };
 
 export default App;

@@ -1,5 +1,8 @@
 import style from './AuthNav.module.css';
+
+
 import CustomNavLink from '../CustomNavLink/CustomNavLink';
+
 
 const AuthNav = () => {
     return(
