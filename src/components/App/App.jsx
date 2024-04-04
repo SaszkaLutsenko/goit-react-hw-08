@@ -10,7 +10,7 @@ import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
 import { selectLoading } from '../../redux/auth/selectors';
 import style from './App.module.css';
 
-const NotFoundPage = (() => import('../../pages/NotFoundPage/NotFoundPage'));
+const NotFoundPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage'));
 const ContactPage = lazy(() => import('../../pages/ContactsPage/ContactsPage'));
 const Home = lazy(() => import('../../pages/Home/Home'));
 const Login = lazy(() => import('../../pages/Login/Login'));
@@ -26,8 +26,7 @@ const App = () => {
     }, [dispatch]);
 
     return (
-        <>
-          {}
+        <Layout>
           {loading ? (
             <Loader />
           ) : (
@@ -36,9 +35,9 @@ const App = () => {
                 <b>...Refreshing</b>
               ) : (
                 <div className={style.container}>
-                  <Routes>
-                    <Route path="/" element={<Layout />}>
-                      <Route index element={<Home />} />
+                  <Suspense fallback={<Loader />}>
+                    <Routes>
+                      <Route path="/" element={<Home />} />
                       <Route
                         path="/register"
                         element={
@@ -66,14 +65,14 @@ const App = () => {
                           />
                         }
                       />
-                    </Route>
-                  </Routes>
+                    
+                    </Routes>
+                  </Suspense>
                 </div>
               )}
             </>
-          )}{" "}
-          {}
-        </>
+          )}
+        </Layout>
       );
 };
 

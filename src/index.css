@@ -45,7 +45,8 @@ a {
 }
 
 body {
-  background: #c9d6ff;
-  background: -webkit-linear-gradient(to right, #e2e2e2, #c9d6ff);
-  background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+  margin: 0;
+  display: flex;
+  min-width: 320px;
+  min-height: 100vh;
 }
