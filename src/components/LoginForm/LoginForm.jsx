@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { logIn } from '../../redux/auth/operations';
+import { login } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
 import style from './LoginForm.module.css';
 
@@ -12,7 +12,7 @@ const validationSchema = Yup.object().shape({
 const LoginForm = () => {
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
-    dispatch(logIn(values));
+    dispatch(login(values));
     actions.resetForm();
   };
 
@@ -40,7 +40,7 @@ const LoginForm = () => {
           <Field type="password" name="password" placeholder="Enter your password" />
           <ErrorMessage name="password" component="div" className={style.error} />
         </div>
-        <button type="submit">Log In</button>
+        <button type="submit">Login</button>
       </Form>
     </Formik>
   );
