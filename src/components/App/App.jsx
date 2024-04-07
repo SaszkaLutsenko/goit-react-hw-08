@@ -7,10 +7,10 @@ import Layout from '../Layout/Layout';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute/PrivateRoute';
 import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
-import { selectLoading } from '../../redux/auth/selectors';
+import { selectAuthLoading } from '../../redux/auth/selectors';
 import style from './App.module.css';
 
-const NotFoundPage = lazy(() => import('../../pages/NotFoundPage/NotFoundPage'));
+
 const ContactPage = lazy(() => import('../../pages/ContactsPage/ContactsPage'));
 const Home = lazy(() => import('../../pages/Home/Home'));
 const Login = lazy(() => import('../../pages/Login/Login'));
@@ -18,8 +18,8 @@ const Registration = lazy(() => import('../../pages/Registration/Registration'))
 
 const App = () => {
     const dispatch = useDispatch();
-    const isRefreshing = useSelector(selectIsRefreshing);
-    const loading = useSelector(selectLoading);
+    // const isRefreshing = useSelector(selectIsRefreshing);
+    // const loading = useSelector(selectAuthLoading);
     
     useEffect(() => {
         dispatch(refreshUser());
@@ -27,51 +27,50 @@ const App = () => {
 
     return (
         <Layout>
-          {loading ? (
+          {/* {loading ? (
             <Loader />
-          ) : (
-            <>
-              {isRefreshing ? (
-                <b>...Refreshing</b>
-              ) : (
-                <div className={style.container}>
-                  <Suspense fallback={<Loader />}>
-                    <Routes>
-                      <Route path="/" element={<Home />} />
-                      <Route
-                        path="/register"
-                        element={
-                          <RestrictedRoute
-                            redirectTo="/contacts"
-                            component={<Registration />}
-                          />
-                        }
-                      />
-                      <Route
-                        path="/login"
-                        element={
-                          <RestrictedRoute
-                            redirectTo="/contacts"
-                            component={<Login />}
-                          />
-                        }
-                      />
-                      <Route
-                        path="/contacts"
-                        element={
-                          <PrivateRoute
-                            redirectTo="/login"
-                            component={<ContactPage />}
-                          />
-                        }
-                      />
-                    
-                    </Routes>
-                  </Suspense>
-                </div>
-              )}
-            </>
-          )}
+          ) :  */}
+         <div className={style.container}>
+            <Suspense fallback={<Loader />}>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="/register"
+                  element={
+                    <RestrictedRoute
+                      redirectTo="/contacts"
+                      component={<Registration />}
+                    />
+                  }
+                />
+                <Route
+                  path="/login"
+                  element={
+                    <RestrictedRoute
+                      redirectTo="/contacts"
+                      component={<Login />}
+                    />
+                  }
+                />
+                <Route
+                  path="/contacts"
+                  element={
+                    <PrivateRoute
+                      redirectTo="/login"
+                      component={<ContactPage />}
+                    />
+                  }
+                />
+              
+              </Routes>
+            </Suspense>
+          </div>
+            
+              
+               
+                
+            
+          
         </Layout>
       );
 };
