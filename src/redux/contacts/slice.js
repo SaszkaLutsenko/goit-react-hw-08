@@ -9,6 +9,7 @@ const handlePending = state => {
 const handleRejected = state => {
   state.loading = false;
 };
+
 const slice = createSlice({
   name: 'contacts',
   initialState: {

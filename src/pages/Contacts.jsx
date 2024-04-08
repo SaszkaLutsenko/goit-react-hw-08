@@ -2,16 +2,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
-import style from './ContactsForm.module.css';
-import { fetchContacts } from '../../redux/contacts/operations';
-import { selectLoading, selectError } from '../../redux/contacts/selectors';
+import style from '../components/stylePages/Contacts.module.css';
+import { fetchContacts } from '../redux/contacts/operations';
+import { selectLoading, selectError } from '../redux/contacts/selectors';
 
-import ContactForm from '../../components/ContactForm/ContactForm';
-import SearchBox from '../../components/SearchBox/SearchBox';
-import Loader from '../../components/Loader/Loader';
-import ContactList from '../../components/ContactList/ContactList';
+import ContactForm from '../components/ContactForm/ContactForm';
+import SearchBox from '../components/SearchBox/SearchBox';
+import Loader from '../components/Loader/Loader';
+import ContactList from '../components/ContactList/ContactList';
 
-const ContactPage = () => {
+const Contacts = () => {
     const dispatch = useDispatch();
     const loading = useSelector(selectLoading);
     const error = useSelector(selectError);
@@ -36,4 +36,4 @@ const ContactPage = () => {
     );
 }
 
-export default ContactPage;
+export default Contacts;

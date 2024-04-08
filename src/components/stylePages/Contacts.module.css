@@ -1,10 +1,10 @@
-.wrap {
+.wrapper {
     margin-top: 64px;
   }
-  .container {
+  .formContainer {
     margin-bottom: 40px;
   }
-  .head {
+  .heading {
     font-weight: 500;
     font-size: 24px;
   }

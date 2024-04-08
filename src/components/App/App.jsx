@@ -1,77 +1,70 @@
-import { useEffect, lazy, Suspense } from 'react';
+import { useEffect, lazy } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Loader/Loader';
-import { selectIsRefreshing } from '../../redux/auth/selectors';
 import { refreshUser } from '../../redux/auth/operations';
 import Layout from '../Layout/Layout';
 import { Route, Routes } from 'react-router-dom';
-import PrivateRoute from '../PrivateRoute/PrivateRoute';
-import RestrictedRoute from '../RestrictedRoute/RestrictedRoute';
-import { selectAuthLoading } from '../../redux/auth/selectors';
+import PrivateRoute from '../PrivateRoute';
+import RestrictedRoute from '../RestrictedRoute';
+import { selectIsRefreshing } from '../../redux/auth/selectors';
 import style from './App.module.css';
+import { Navigate } from 'react-router-dom';
+import { useAuth } from '../hooks';
 
 
-const ContactPage = lazy(() => import('../../pages/ContactsPage/ContactsPage'));
-const Home = lazy(() => import('../../pages/Home/Home'));
-const Login = lazy(() => import('../../pages/Login/Login'));
-const Registration = lazy(() => import('../../pages/Registration/Registration'));
+
+const Contacts = lazy(() => import('../../pages/Contacts'));
+const Home = lazy(() => import('../../pages/Home'));
+const Login = lazy(() => import('../../pages/Login'));
+const Registration = lazy(() => import('../../pages/Registration'));
 
 const App = () => {
     const dispatch = useDispatch();
-    // const isRefreshing = useSelector(selectIsRefreshing);
-    // const loading = useSelector(selectAuthLoading);
+    const isRefreshing = useAuth();
+    
     
     useEffect(() => {
         dispatch(refreshUser());
     }, [dispatch]);
 
-    return (
-        <Layout>
-          {/* {loading ? (
-            <Loader />
-          ) :  */}
-         <div className={style.container}>
-            <Suspense fallback={<Loader />}>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route
-                  path="/register"
-                  element={
-                    <RestrictedRoute
-                      redirectTo="/contacts"
-                      component={<Registration />}
-                    />
-                  }
-                />
-                <Route
-                  path="/login"
-                  element={
-                    <RestrictedRoute
-                      redirectTo="/contacts"
-                      component={<Login />}
-                    />
-                  }
-                />
-                <Route
-                  path="/contacts"
-                  element={
-                    <PrivateRoute
-                      redirectTo="/login"
-                      component={<ContactPage />}
-                    />
-                  }
-                />
-              
-              </Routes>
-            </Suspense>
-          </div>
+    return isRefreshing ? ( <Loader />) : (
+        <Routes>
+          <Route path='/' element={<Layout />}>
+            <Route path='/' element={<Home />}/>
+           
+            <Route 
+            path="/register" 
+            element={
+            <RestrictedRoute 
+              redirectTo="/contacts" 
+              component={<Registration />}
+              />}
+              />
+            <Route
+            path="/login"
+            element={
+            <RestrictedRoute
+              redirectTo="/contacts"
+              component={<Login />}
+              />}
+              /> 
+               <Route
+                    path="/contacts"
+                    element={
+                      <PrivateRoute
+                        redirectTo="/login"
+                        component={<Contacts />}
+                      />
+                    }
+                  />
+             <Route path="*" element={ <Navigate to="/" replace/>} />  
             
-              
-               
-                
-            
-          
-        </Layout>
+          </Route>
+        </Routes>
+
+     
+
+       
       );
 };
 
