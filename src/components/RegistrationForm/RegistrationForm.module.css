@@ -1,0 +1,47 @@
+container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .label {
+    margin-bottom: 5px;
+    display: block;
+  }
+  
+  .field {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .button {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  .show {
+    background-color: green;
+    color: white;
+  }
+  
+  .hide {
+    background-color: red;
+    color: white;
+  }

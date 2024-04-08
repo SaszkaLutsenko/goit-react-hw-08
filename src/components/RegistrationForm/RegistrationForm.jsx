@@ -1,58 +1,87 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import style from './RegistrationForm.module.css';
-import { useDispatch } from 'react-redux';
-import { register } from '../../redux/auth/operations';
-import * as Yup from 'yup';
+import style from "./RegistrationForm.module.css";
+import { register } from "../../redux/auth/operations";
+import { useDispatch } from "react-redux";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useId, useState  } from "react";
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string().min(3, 'Name must be at least 3 characters').required('Name is required'),
-  email: Yup.string().email('Invalid email').required('Email is required'),
-  password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+
+const LogSchema = Yup.object().shape({
+  name: Yup.string().required("Name is required"),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
 });
 
-const RegistrationForm = () => {
+export default function RegisterForm() {
   const dispatch = useDispatch();
-  const handleSubmit = (values, actions) => {
-    dispatch(register(values));
-    actions.resetForm();
+  const nameId = useId();
+  const emailId = useId();
+  const pasId = useId();
+  const handleSubmit = (value, action) => {
+    dispatch(register(value));
+    action.resetForm();
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
-    <Formik
-      initialValues={{
-        name: '',
-        email: '',
-        password: '',
-      }}
-      validationSchema={validationSchema}
-      onSubmit={handleSubmit}
-    >
-      <Form className={style.form} autoComplete="off">
-        <div className={style.field}>
-          <label htmlFor="name" className={style.label}>
-            Username
-            <Field type="text" name="name" placeholder="name" />
-            <ErrorMessage name="name" component="div" className={style.error} />
+    <div className={style.container}>
+      <Formik
+        initialValues={{
+          name: "",
+          email: "",
+          password: "",
+        }}
+        onSubmit={handleSubmit}
+        validationSchema={LogSchema}
+      >
+        <Form>
+          <label htmlFor={nameId} className={style.label}>
+            Name
           </label>
-        </div>
-        <div className={style.field}>
-          <label htmlFor="email" className={style.label}>
+          <Field type="text" name="name" id={nameId} className={style.field} />
+          <ErrorMessage name="name" component="span" className={style.error} />
+          <label htmlFor={emailId} className={style.label}>
             Email
-            <Field type="email" name="email" placeholder="email" />
-            <ErrorMessage name="email" component="div" className={style.error} />
           </label>
-        </div>
-        <div className={style.field}>
-          <label htmlFor="password" className={style.label}>
+          <Field type="email" name="email" id={emailId} className={style.field} />
+          <ErrorMessage name="email" component="span" className={style.error} />
+          <label htmlFor={pasId} className={style.label}>
             Password
-            <Field type="password" name="password" placeholder="password" />
-            <ErrorMessage name="password" component="div" className={style.error} />
           </label>
-        </div>
-        <button type="submit">Register</button>
-      </Form>
-    </Formik>
+          <div className={style.passwordContainer}>
+            <Field
+              type={showPassword ? "text" : "password"}
+              name="password"
+              id={pasId}
+              className={style.field}
+            />
+            <button
+              type="button"
+              onClick={toggleShowPassword}
+              className={`${style.toggleButton} ${
+                showPassword ? style.show : style.hide
+              }`}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+          <ErrorMessage
+            name="password"
+            component="span"
+            className={style.error}
+          />
+          <button className={style.button} type="submit">
+            Register
+          </button>
+        </Form>
+      </Formik>
+    </div>
   );
-};
-
-export default RegistrationForm;
+}

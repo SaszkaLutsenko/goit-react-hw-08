@@ -6,10 +6,9 @@ import Layout from '../Layout/Layout';
 import { Route, Routes } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute';
 import RestrictedRoute from '../RestrictedRoute';
-import { selectIsRefreshing } from '../../redux/auth/selectors';
-import style from './App.module.css';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '../hooks';
+import { selectIsRefreshing } from '../../redux/auth/selectors';
 
 
 
@@ -20,7 +19,7 @@ const Registration = lazy(() => import('../../pages/Registration'));
 
 const App = () => {
     const dispatch = useDispatch();
-    const isRefreshing = useAuth();
+    const isRefreshing = useSelector(selectIsRefreshing);
     
     
     useEffect(() => {
@@ -31,7 +30,6 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Layout />}>
             <Route path='/' element={<Home />}/>
-           
             <Route 
             path="/register" 
             element={
