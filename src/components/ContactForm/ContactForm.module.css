@@ -23,7 +23,7 @@
   
   .field > input {
     padding: 10px 10px;
-    border: 1px solid #ad865a;
+    border: 1px solid grey;
     border-radius: 8px;
     margin-bottom: 8px;
   }
@@ -48,6 +48,7 @@
     background-color: grey;
     font-size: 18px;
     transition: background-color 250ms grey;
+    cursor: pointer;
   }
   
   .button:hover,

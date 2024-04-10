@@ -1,47 +1,63 @@
 container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .label {
-    margin-bottom: 5px;
-    display: block;
-  }
-  
-  .field {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .error {
-    color: red;
-  }
-  
-  .button {
-    margin-top: 10px;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .button:hover {
-    background-color: #0056b3;
-  }
-  .show {
-    background-color: green;
-    color: white;
-  }
-  
-  .hide {
-    background-color: red;
-    color: white;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid grey;
+  border-radius: 8px;
+}
+
+.label {
+  margin-bottom: 5px;
+  display: block;
+}
+
+.field {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid grey;
+  border-radius: 8px;
+}
+
+.error {
+  color: red;
+}
+
+.button {
+  width: 150px;
+  padding: 8px 16px;
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 0 auto;
+  background-color: grey;
+  font-size: 18px;
+  transition: background-color 250ms grey;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: darkgray;
+}
+.show {
+  background-color: grey;
+  color: white;
+}
+
+.hide {
+  background-color: lightgrey;
+  color: white;
+}
+.toggleButton {
+
+ 
+  border: 1px solid black;
+  border-radius: 7px;
+  margin: 0 auto;
+  background-color: lightgrey;
+  margin-bottom: 10px;
+  transition: background-color 250ms grey;
+  cursor: pointer;
+}

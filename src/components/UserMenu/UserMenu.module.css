@@ -7,3 +7,15 @@
   .name {
     font-weight: 700;
   }
+
+  .button {
+    
+    
+    border: 1px solid black;
+    border-radius: 7px;
+    margin: 0 auto;
+    background-color: lightgray;
+    
+    transition: background-color 250ms grey;
+    cursor: pointer;
+  } 
