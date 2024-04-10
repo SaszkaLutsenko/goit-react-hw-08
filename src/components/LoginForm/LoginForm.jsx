@@ -3,7 +3,8 @@ import * as Yup from 'yup';
 import { login } from '../../redux/auth/operations';
 import { useDispatch } from 'react-redux';
 import style from './LoginForm.module.css';
-import { useState } from 'react';
+import {useId, useState } from 'react';
+
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -11,6 +12,8 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginForm = () => {
+  const emailId = useId();
+  const pasId = useId();
   const dispatch = useDispatch();
   const handleSubmit = (values, actions) => {
     dispatch(login(values));
@@ -34,12 +37,12 @@ const LoginForm = () => {
       onSubmit={handleSubmit}
     >
       <Form className={style.form} autoComplete="off">
-          <label htmlFor="email" className={style.label}>
+          <label htmlFor={emailId} className={style.label}>
             Email
           </label>
           <Field type="email" name="email" className={style.field} />
           <ErrorMessage name="email" component="div" className={style.error} />
-          <label htmlFor="password" className={style.label}>
+          <label htmlFor={pasId} className={style.label}>
             Password
           </label>
           <div className={style.passwordContainer}>

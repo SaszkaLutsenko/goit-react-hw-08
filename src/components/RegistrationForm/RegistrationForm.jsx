@@ -14,7 +14,7 @@ const LogSchema = Yup.object().shape({
     .required("Password is required"),
 });
 
-export default function RegisterForm() {
+const RegisterForm = () => {
   const dispatch = useDispatch();
   const nameId = useId();
   const emailId = useId();
@@ -85,3 +85,5 @@ export default function RegisterForm() {
     </div>
   );
 }
+
+export default RegisterForm;
